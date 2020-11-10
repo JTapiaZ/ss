@@ -235,7 +235,7 @@ exports.findUserCoinsAsc = async (req, res) => {
 
 // ----------- delete a user with the specified id -----------
 exports.userDelete = (req, res) => {
-    User.findOneAndDelete(req.params.id)
+    User.findByIdAndDelete(req.params.id)
         .then(data => {
             if (!data) {
                 return res.status(404).send({

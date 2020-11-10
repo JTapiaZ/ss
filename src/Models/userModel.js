@@ -27,6 +27,7 @@ const userSchema = new Schema(
         },
         monedaPreferida: {
             type: String,
+            required: true,
             default: "usd",
             enum: ["usd", "eur", 'ars']
         },

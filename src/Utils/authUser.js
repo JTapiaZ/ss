@@ -20,11 +20,19 @@ const userRegister = async (req, res) => {
         return res.status(400).send("¡Por favor rellene el campo contraseña!");
     }
 
+    const AlphanumericValid = validateCode(req.body.password); 
+    if(!AlphanumericValid){
+        return res.status(400).send("¡Debes ingresar una contraseña mas segura (alfanumerica)!");
+    }
+    
+
     const array = ['usd', 'eur', 'ars']
 
     if (!array.includes(req.body.monedaPreferida)) {
         return res.status(400).send('¡Por favor ingrese un tipo de moneda preferida valido (usd, eur, ars)!')
     } 
+
+
 
     try {
         //Validate the username
@@ -122,6 +130,17 @@ const checkToken = (req, res, next) => {
       res.status(401).send('¡Token no valido, asegurate de estar logueado!')
     }
   };
+
+
+// Check password is alphanumeric  
+function validateCode(res){
+    var TCode = res.toString()
+    if(!/[^a-zA-Z0-9]/.test( TCode ) ) {
+        console.log('Input is not alphanumeric');
+        return false;
+    }
+    return true;     
+}
 
 
 module.exports = {
